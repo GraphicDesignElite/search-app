@@ -1,0 +1,10 @@
+
+<form id="search-form" name="search-form">
+  <input id="searchQuery" name="searchQuery" placeholder="search" [(ngModel)]="searchQuery" />
+  <button id="search" (click) = "searchApi()" >Search</button>
+</form>
+
+<span *ngIf="results">{{numFound}} Results | {{numPages}} Pages</span>
+<!-- *ngIf="numFound>rowsToDisplay" -->
+<pagination-buttons [page]="page" [searchQuery]="searchQuery" [numPages]="numPages"></pagination-buttons>
+

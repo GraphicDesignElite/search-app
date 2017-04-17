@@ -2,19 +2,33 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
+import { SearchViewComponent } from './search-view/search-view.component';
+
+import { SolrService } from './solr.service';
+
+import { AppRouting } from './app.routing';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PaginationButtonsComponent } from './pagination-buttons/pagination-buttons.component';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SearchViewComponent,
+    PageNotFoundComponent,
+    PaginationButtonsComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    AppRouting
+    
   ],
-  providers: [],
+  providers: [SolrService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
