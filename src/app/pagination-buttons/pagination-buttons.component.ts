@@ -10,18 +10,16 @@ export class PaginationButtonsComponent implements OnInit {
   
   @Input() page: number;
   @Input() searchQuery: string;
-  @Input() numPages: number;
+  @Input() numFound: number;
   adjacent: number = 6;
 
   repeat = Array;
-
+  currentPage: number;
   constructor(private _router: Router) { 
-
+    this.currentPage = this.page;
   }
   ngOnInit() {
-    if(this.page == 0){
-
-    }
+    this.currentPage = this.page;
   }
   paginateToPage(page:number){
     this._router.navigate(['/search'], { queryParams: {q:this.searchQuery, page:page} })

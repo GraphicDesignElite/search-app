@@ -13,6 +13,7 @@ import { AppRouting } from './app.routing';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PaginationButtonsComponent } from './pagination-buttons/pagination-buttons.component';
 
+import {Ng2PaginationModule} from 'ng2-pagination';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { PaginationButtonsComponent } from './pagination-buttons/pagination-butt
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRouting
+    AppRouting,
+    Ng2PaginationModule 
     
   ],
   providers: [SolrService ],

@@ -15,11 +15,11 @@ export class SearchViewComponent implements OnInit {
   searchQuery :string = ''; // whats searched
   numFound: number; // how many results
   results :any; // Json
-  page:number= 0;
+  page:number= 1;
   rowsToDisplay:number = 10;
   numPages:number = 0;
   offset:number = 0;
-
+  documents:any[];
 
   constructor(private _solrService: SolrService, public _route: ActivatedRoute, private _router: Router){}
   ngOnInit() {
@@ -29,14 +29,14 @@ export class SearchViewComponent implements OnInit {
           this.searchQuery = params['q'];
           if (params['page']) { // pagination
             this.page = parseInt(params['page']);
-            this.offset = this.page * this.rowsToDisplay;
+            this.offset = (this.page - 1) * this.rowsToDisplay;
             if(this.offset!=0){this.offset++;}
           }
           this.subscription = this._solrService.searchSolr(this.searchQuery, this.rowsToDisplay, this.offset).subscribe(results =>{
             this.results = results.response;
             this.numFound = results.response.numFound;
             this.numPages = Math.ceil(this.numFound / this.rowsToDisplay);
-            
+            this.documents = this.results.docs;
             console.log(this.results); // debug
           });
       }

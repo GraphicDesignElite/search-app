@@ -1,5 +1,4 @@
-<div class="pagination-container"><!-- -->
-  <button id="previous" (click) = "paginatePrev()" [disabled]="!page">Previous</button>
-  <button id="next" (click) = "paginateNext()" >Next</button>
-</div>
-
+<pagination-controls (pageChange)="paginateToPage($event)" id="1" maxSize="5"
+                      directionLinks="true"
+                      autoHide="true">
+                </pagination-controls>

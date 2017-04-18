@@ -6,5 +6,14 @@
 
 <span *ngIf="results">{{numFound}} Results | {{numPages}} Pages</span>
 <!-- *ngIf="numFound>rowsToDisplay" -->
-<pagination-buttons [page]="page" [searchQuery]="searchQuery" [numPages]="numPages"></pagination-buttons>
 
+<ng-container *ngFor="let document of documents | paginate: {itemsPerPage: 10, currentPage:page, totalItems: numFound, id: '1'}; let i = index">
+    <div class="sr-card">
+      <h3>{{document.dc_title_s}}</h3>
+      <p class="sr-loc">{{document.Content_Location_s}}</p>
+      <p class="sr-desc">{{document.description_s}}</p>
+    </div>
+</ng-container>
+<div class="pagination-wrapper">
+    <pagination-buttons [page]="page" [searchQuery]="searchQuery" [numFound]="numFound"></pagination-buttons>
+</div>
