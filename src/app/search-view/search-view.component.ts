@@ -12,24 +12,30 @@ import 'rxjs/add/operator/switchMap';
 export class SearchViewComponent implements OnInit {
   
   private subscription;
+  searching:boolean = false; // is searching?
+
   searchQuery :string = ''; // whats searched
   numFound: number; // how many results
   results :any; // Json
-  page:number= 1;
+  page:number = 1;
   rowsToDisplay:number = 10;
   numPages:number = 0;
   offset:number = 0;
   documents:any[];
+  responseTime:any;
+  
 
   constructor(private _solrService: SolrService, public _route: ActivatedRoute, private _router: Router){}
   ngOnInit() {
     // produce result on page load
     this._route.queryParams.subscribe(params => {
       if (params['q']) {
+          var startTime = new Date();
+
           this.searchQuery = params['q'];
           if (params['page']) { // pagination
             this.page = parseInt(params['page']);
-            this.offset = (this.page - 1) * this.rowsToDisplay;
+            this.offset = (this.page - 1) * this.rowsToDisplay; // 1 based pagination
             if(this.offset!=0){this.offset++;}
           }
           this.subscription = this._solrService.searchSolr(this.searchQuery, this.rowsToDisplay, this.offset).subscribe(results =>{
@@ -39,10 +45,10 @@ export class SearchViewComponent implements OnInit {
             this.documents = this.results.docs;
             console.log(this.results); // debug
           });
-      }
-      else{
-        
-      }
+
+      var endTime = new Date();
+      this.responseTime = Math.abs(startTime.getTime() - endTime.getTime()); 
+    }
     });
   }
   searchApi(){
@@ -50,9 +56,14 @@ export class SearchViewComponent implements OnInit {
         this._router.navigate(['/search'], { queryParams: {q:this.searchQuery} }) 
       }
   }
+  isSearching(){
+    if(this.searchQuery != ''){
+        this.searching = true;
+    }
+    return this.searching;
+  }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
 }

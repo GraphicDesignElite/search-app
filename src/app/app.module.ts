@@ -14,20 +14,24 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { PaginationButtonsComponent } from './pagination-buttons/pagination-buttons.component';
 
 import {Ng2PaginationModule} from 'ng2-pagination';
+import { FooterComponent } from './footer/footer.component';
+import { PageHeaderComponent } from './page-header/page-header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchViewComponent,
     PageNotFoundComponent,
-    PaginationButtonsComponent
+    PaginationButtonsComponent,
+    FooterComponent,
+    PageHeaderComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     AppRouting,
-    Ng2PaginationModule 
+    Ng2PaginationModule
     
   ],
   providers: [SolrService ],

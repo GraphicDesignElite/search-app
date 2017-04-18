@@ -1,19 +1,32 @@
-
-<form id="search-form" name="search-form">
-  <input id="searchQuery" name="searchQuery" placeholder="search" [(ngModel)]="searchQuery" />
-  <button id="search" (click) = "searchApi()" >Search</button>
-</form>
-
-<span *ngIf="results">{{numFound}} Results | {{numPages}} Pages</span>
-<!-- *ngIf="numFound>rowsToDisplay" -->
-
-<ng-container *ngFor="let document of documents | paginate: {itemsPerPage: 10, currentPage:page, totalItems: numFound, id: '1'}; let i = index">
-    <div class="sr-card">
-      <h3>{{document.dc_title_s}}</h3>
-      <p class="sr-loc">{{document.Content_Location_s}}</p>
-      <p class="sr-desc">{{document.description_s}}</p>
+<div id="search-page" [class.searching]="isSearching()">
+  <app-page-header></app-page-header>
+  <div id="content">
+    <div id="search-form-wrapper">
+      <img src="../../assets/img/ln_logo.svg" id="logo-large"/>
+      <form id="search-form" name="search-form">
+        <input id="search-query" name="search-query" placeholder="Search the .luxury Network" [(ngModel)]="searchQuery" />
+        <button id="search-button" (click)="searchApi()">Search</button>
+      </form>
     </div>
-</ng-container>
-<div class="pagination-wrapper">
+
+    <span *ngIf="results">{{numFound}} Results ( {{responseTime}} ms )</span>
+    <div *ngIf="results" id="results" class="clearfix">
+      <div id="results-wrapper">
+        <ng-container *ngFor="let document of documents | paginate: {itemsPerPage: 10, currentPage:page, totalItems: numFound, id: '1'}; let i = index">
+          <div class="sr-card">
+            <h3><a href="{{document.Content_Location_s}}">{{document.dc_title_s}}</a></h3>
+            <p class="sr-loc">{{document.Content_Location_s}}</p>
+            <p class="sr-desc">{{document.description_s}}</p>
+          </div>
+        </ng-container>
+      </div>
+      <div id="sidebar">
+        sidebar
+      </div>
+    </div>
+  </div>
+  <div class="pagination-wrapper">
     <pagination-buttons [page]="page" [searchQuery]="searchQuery" [numFound]="numFound"></pagination-buttons>
+  </div>
 </div>
+<!-- end searh-page -->
