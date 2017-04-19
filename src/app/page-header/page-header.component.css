@@ -1,6 +1,8 @@
-#page-header{ background:#fbfafa; border-bottom:1px solid #efefef; }
+#page-header{ background:#fff; border-bottom:1px solid #efefef; }
 #header-logo{float:left; width:30%;}
-#logo-small{max-width:140px; margin-left:15px; margin-top:10px; margin-bottom:10px;}
+#header-logo a{position:relative; z-index:301; }
+
+
 #header-links{float:right; width:70%;} 
 #header-links>ul{margin:0px; float:right;}
 #header-links>ul>li{ float:right;}

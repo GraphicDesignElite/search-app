@@ -16,6 +16,7 @@ import { PaginationButtonsComponent } from './pagination-buttons/pagination-butt
 import {Ng2PaginationModule} from 'ng2-pagination';
 import { FooterComponent } from './footer/footer.component';
 import { PageHeaderComponent } from './page-header/page-header.component';
+import { TextHighlightPipe } from './text-highlight.pipe';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,9 @@ import { PageHeaderComponent } from './page-header/page-header.component';
     PageNotFoundComponent,
     PaginationButtonsComponent,
     FooterComponent,
-    PageHeaderComponent
+    PageHeaderComponent,
+    TextHighlightPipe
+ 
   ],
   imports: [
     BrowserModule,

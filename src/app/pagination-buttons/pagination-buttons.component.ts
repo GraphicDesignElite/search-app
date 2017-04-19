@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges  } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   templateUrl: './pagination-buttons.component.html',
   styleUrls: ['./pagination-buttons.component.css']
 })
-export class PaginationButtonsComponent implements OnInit {
+export class PaginationButtonsComponent implements OnInit, OnChanges {
   
   @Input() page: number;
   @Input() searchQuery: string;
@@ -19,6 +19,9 @@ export class PaginationButtonsComponent implements OnInit {
     this.currentPage = this.page;
   }
   ngOnInit() {
+    this.currentPage = this.page;
+  }
+  ngOnChanges(changes:any):void {
     this.currentPage = this.page;
   }
   paginateToPage(page:number){

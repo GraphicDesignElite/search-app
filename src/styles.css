@@ -20,6 +20,9 @@ body, td, a, p, .h {
 textarea:focus, input:focus{
     outline: none;
 }
+strong, b{
+  font-weight: bold;
+}
 .wrapper {
   min-height: 100%;
   margin-bottom: -80px;
@@ -28,4 +31,12 @@ textarea:focus, input:focus{
 .push {
   height: 80px;
 }
-
+.highlight{
+  font-weight:bold;
+}
+.pagination-buttons .ng2-pagination li{transition:all .3;}
+.pagination-buttons .ng2-pagination li:hover{cursor:pointer;}
+.pagination-buttons .ng2-pagination .current{ background:#333; color:#fff;}
+.pagination-buttons .ng2-pagination .pagination-previous a::before, .pagination-buttons .ng2-pagination .pagination-next a::after{margin:0px;}
+#logo-small{max-width:140px; margin-left:15px; margin-top:10px; margin-bottom:10px; opacity:0;}
+.searching #logo-small{opacity:1;}
