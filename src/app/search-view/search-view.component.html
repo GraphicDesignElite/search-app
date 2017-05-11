@@ -4,9 +4,9 @@
     <!--start form -->
     <div id="search-form-wrapper">
       <img src="../../assets/img/ln_logo.svg" id="logo-large" />
-      <form id="search-form" name="search-form">
-        <input id="search-query" name="search-query" placeholder="Search the .luxury Network" [(ngModel)]="searchQuery" />
-        <button id="search-button" (click)="searchApi()">Search</button>
+      <form id="search-form" name="search-form" (submit)="searchApi()">
+        <input id="search-query" name="search-query" placeholder="Search the .luxury Network" [(ngModel)]="searchQuery" #searchinput />
+        <input type="submit" id="search-button" (click)="searchApi()" value="Search"/>
       </form>
     </div>
     <!--end form -->
@@ -37,7 +37,7 @@
         </div>
       </div>
       <div id="sidebar">
-        sidebar
+        
       </div>
     </div>
     <!--end results --> 

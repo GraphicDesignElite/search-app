@@ -1,11 +1,1 @@
-#page-header{ background:#fff; border-bottom:1px solid #efefef; }
-#header-logo{float:left; width:30%;}
-#header-logo a{position:relative; z-index:301; }
-
-
-#header-links{float:right; width:70%;} 
-#header-links>ul{margin:0px; float:right;}
-#header-links>ul>li{ float:right;}
-#header-links>ul>li>a{ transition: all .3s; display:inline-block; color:#666; text-decoration: none; padding:20px 10px;}
-#header-links>ul>li>a:hover{ color:#333; text-decoration:underline;}
 

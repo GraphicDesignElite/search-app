@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute, Params, NavigationEnd } from '@angular/router';
 import { SolrService } from '../solr.service';
 import 'rxjs/add/operator/switchMap';
 
@@ -10,7 +10,8 @@ import 'rxjs/add/operator/switchMap';
   styleUrls: ['./search-view.component.css']
 })
 export class SearchViewComponent implements OnInit {
-  
+  @ViewChild('searchinput') searchinput;
+
   private subscription;
   searching:boolean = false; // is searching?
 
@@ -25,7 +26,13 @@ export class SearchViewComponent implements OnInit {
   responseTime:any;
   
 
-  constructor(private _solrService: SolrService, public _route: ActivatedRoute, private _router: Router){}
+  constructor(private _solrService: SolrService, public _route: ActivatedRoute, private _router: Router){
+        _router.events.subscribe((val) => { // scroll to top after each search
+            if (val instanceof NavigationEnd){
+                window.scrollTo(0,0);
+            }
+        });
+  }
   ngOnInit() {
     // produce result on page load
     this._route.queryParams.subscribe(params => {
@@ -35,7 +42,7 @@ export class SearchViewComponent implements OnInit {
           this.searchQuery = params['q'];
           if (params['page']) { // pagination
             this.page = parseInt(params['page']);
-            this.offset = (this.page - 1) * this.rowsToDisplay; // 1 based pagination
+            this.offset = (this.page - 1) * this.rowsToDisplay -1; // Page 1 based
             if(this.offset!=0){this.offset++;}
           }
           this.subscription = this._solrService.searchSolr(this.searchQuery, this.rowsToDisplay, this.offset).subscribe(results =>{
@@ -43,7 +50,6 @@ export class SearchViewComponent implements OnInit {
             this.numFound = results.response.numFound;
             this.numPages = Math.ceil(this.numFound / this.rowsToDisplay);
             this.documents = this.results.docs;
-            console.log(this.results); // debug
           });
 
       var endTime = new Date();
@@ -52,9 +58,11 @@ export class SearchViewComponent implements OnInit {
     });
   }
   searchApi(){
+      this.searchinput.nativeElement.blur();
       if(this.searchQuery != ''){
         this._router.navigate(['/search'], { queryParams: {q:this.searchQuery} }) 
       }
+      
   }
   isSearching(){
     if(this.searchQuery != ''){
